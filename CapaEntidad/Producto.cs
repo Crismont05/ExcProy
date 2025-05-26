@@ -8,7 +8,7 @@ namespace CapaEntidad
 {
     public class Producto
     {
-        public int idProducto { get; }
+        public int idProducto { get; set; }
         public int idProveedor { get; set; }
         public int nombre { get; set; }
         public decimal precio { get; set; }

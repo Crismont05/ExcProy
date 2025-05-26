@@ -8,7 +8,7 @@ namespace CapaDatos
 {
     public class Usuario
     {
-        public int idUsuario { get; }
+        public int idUsuario { get; set; }
         public string usuario { get; set; }
         public string nombres { get; set; }
         public string apellidos { get; set; }
