@@ -1,0 +1,124 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    /* Mantén estas propiedades si quieres que el body ocupe todo el alto,
+       pero para centrar el login específicamente, las moveremos al container */
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+    /* Quita flexbox del body si quieres centrar solo el login-container dentro de un div padre */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    /* AÑADE ESTAS PROPIEDADES PARA CENTRAR EL LOGIN-CONTAINER */
+    position: absolute; /* O fixed si quieres que se quede quieto al scroll */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Asegúrate de que no haya un padre con position: relative que lo afecte de forma no deseada */
+}
+
+
+.login-form h2 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 2em;
+    position: relative;
+}
+
+    .login-form h2::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background-color: #2575fc;
+        border-radius: 2px;
+    }
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .input-group input[type="text"],
+    .input-group input[type="password"] {
+        width: calc(100% - 20px);
+        padding: 12px 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+        .input-group input[type="text"]:focus,
+        .input-group input[type="password"]:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.3);
+        }
+
+button[type="submit"] {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+    button[type="submit"]:hover {
+        background: linear-gradient(to right, #500cb3, #1e60d4);
+        transform: translateY(-2px);
+    }
+
+.links {
+    margin-top: 25px;
+    font-size: 0.9em;
+}
+
+    .links a {
+        color: #2575fc;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.3s ease;
+    }
+
+        .links a:hover {
+            color: #6a11cb;
+            text-decoration: underline;
+        }
+
+
+footer {
+    position: absolute;
+    bottom: 20px; /* o la distancia que prefieras del borde inferior */
+    width: 100%;
+    text-align: center;
+    color: #eee; /* Ajusta el color del texto del footer */
+}
