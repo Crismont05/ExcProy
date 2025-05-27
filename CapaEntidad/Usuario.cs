@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaDatos
+namespace CapaEntidad
 {
     public class Usuario
     {
@@ -13,6 +13,7 @@ namespace CapaDatos
         public string nombres { get; set; }
         public string apellidos { get; set; }
         public string clave { get; set; }
+        public string rol { get; set; } 
         public bool estado { get; set; }
     }
 }

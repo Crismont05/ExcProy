@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +27,14 @@ namespace ExcProy.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public JsonResult ListarUsuarios()
+        {
+            List<Usuario> lista = new List<Usuario>();
+            lista = new CN_Usuario().Listar();
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
     }
 }

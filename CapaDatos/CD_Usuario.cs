@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -18,7 +19,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "SELECT idUsuario, usuario, nombres, apellidos, clave, estado FROM Usuarios";
+                    string query = "SELECT * FROM Usuarios";
 
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
@@ -37,6 +38,7 @@ namespace CapaDatos
                                     nombres = dr["nombres"].ToString(),
                                     apellidos = dr["apellidos"].ToString(),
                                     clave = dr["clave"].ToString(),
+                                    rol = dr["rol"].ToString(),
                                     estado = Convert.ToBoolean(dr["estado"])
                                 });
                         }
