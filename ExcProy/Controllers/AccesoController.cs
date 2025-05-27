@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+﻿using CapaEntidad;
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace ExcProy.Controllers
         {
             Usuario oUsuario = new Usuario();
             oUsuario = new CN_Usuario().Listar().Where(u => u.usuario == usuario && u.clave == CN_Recursos.ConvertirSHA256(clave)).FirstOrDefault();
-            if (oUsuario != null)
+            if (oUsuario == null)
             {
                 ViewBag.Error = "Usuario o contraseña no correcta";
                 return View();
