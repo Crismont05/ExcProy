@@ -117,5 +117,27 @@ namespace CapaDatos
             }
             return resultado;
         }
+        public bool Eliminar(int id, out string mensaje)
+        {
+            bool resultado = false;
+            mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("delete top (1) from Usuarios where idUsuario = @id", oconexion);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandType = CommandType.Text;
+                    oconexion.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                mensaje = ex.Message;
+            }
+            return resultado;
+        }
     }
 }
