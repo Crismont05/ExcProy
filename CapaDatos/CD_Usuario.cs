@@ -51,5 +51,93 @@ namespace CapaDatos
             }
             return lista;   
         }
+        public int Registrar(Usuario obj, out string mensaje)
+        {
+            int id = 0;
+            mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn)) 
+                { 
+                    SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", oconexion );
+                    cmd.Parameters.AddWithValue("Usuario", obj.usuario);
+                    cmd.Parameters.AddWithValue("Nombres", obj.nombres);
+                    cmd.Parameters.AddWithValue("Apellidos", obj.apellidos);
+                    cmd.Parameters.AddWithValue("Clave", obj.clave);
+                    cmd.Parameters.AddWithValue("Rol", obj.rol);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure; 
+
+                    oconexion.Open();
+
+                    id = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
+                    mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+                }
+            }
+            catch (Exception ex) 
+            {
+                id = 0;
+                mensaje = ex.Message;
+            }
+            return id;
+        }
+        public bool Editar(Usuario obj, out string mensaje)
+        {
+            bool resultado = false;
+            mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_EditarUsuario", oconexion);
+                    cmd.Parameters.AddWithValue("idUsuario", obj.idUsuario);
+                    cmd.Parameters.AddWithValue("Usuario", obj.usuario);
+                    cmd.Parameters.AddWithValue("Nombres", obj.nombres);
+                    cmd.Parameters.AddWithValue("Apellidos", obj.apellidos);
+                    cmd.Parameters.AddWithValue("Clave", obj.clave);
+                    cmd.Parameters.AddWithValue("Rol", obj.rol);
+                    cmd.Parameters.AddWithValue("Estado", obj.estado);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oconexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    resultado = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+                    mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                mensaje = ex.Message;
+            }
+            return resultado;
+        }
+        public bool Eliminar(int id, out string mensaje)
+        {
+            bool resultado = false;
+            mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("delete top (1) from Usuarios where idUsuario = @id", oconexion);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandType = CommandType.Text;
+                    oconexion.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                mensaje = ex.Message;
+            }
+            return resultado;
+        }
     }
 }
