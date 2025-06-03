@@ -1,57 +1,74 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    /* Mantén estas propiedades si quieres que el body ocupe todo el alto,
-       pero para centrar el login específicamente, las moveremos al container */
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
     margin: 0;
-    color: #333;
-    /* Quita flexbox del body si quieres centrar solo el login-container dentro de un div padre */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Ensure it takes full viewport height */
 }
 
+.header-bar {
+    width: 100%;
+    height: 80px; /* Adjust height as needed */
+    background-color: #cb2b2b; /* Red color from your image */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 .login-container {
     background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-top: 100px; /* Space from the header bar */
+    max-width: 900px; /* Adjust as needed */
     width: 100%;
-    max-width: 400px;
-    text-align: center;
-    /* AÑADE ESTAS PROPIEDADES PARA CENTRAR EL LOGIN-CONTAINER */
-    position: absolute; /* O fixed si quieres que se quede quieto al scroll */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Asegúrate de que no haya un padre con position: relative que lo afecte de forma no deseada */
+    position: relative; /* For z-index to bring it above the header bar */
+    z-index: 1;
 }
 
-
-.login-form h2 {
-    margin-bottom: 30px;
-    color: #333;
-    font-size: 2em;
-    position: relative;
+.logo-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 40px; /* Space between logo and form */
+    border-right: 1px solid #eee; /* Optional separator line */
 }
 
-    .login-form h2::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: -10px;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 4px;
-        background-color: #2575fc;
-        border-radius: 2px;
+    .logo-section img {
+        max-width: 250px; /* Adjust logo size */
+        height: auto;
+        border: 2px solid #ccc; /* Border around the logo as in the image */
+        border-radius: 50%; /* Make it circular if your logo allows */
+        padding: 10px;
     }
+
+.login-form-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 40px; /* Space between logo and form */
+}
+
+.user-icon-large {
+    font-size: 5px; /* Adjust size of the large user icon */
+    color: #2a2a2a;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 350px; /* Max width for the form inputs */
+}
 
 .input-group {
     margin-bottom: 20px;
-    text-align: left;
 }
 
     .input-group label {
@@ -63,57 +80,68 @@ body {
 
     .input-group input[type="text"],
     .input-group input[type="password"] {
-        width: calc(100% - 20px);
+        width: calc(100% - 20px); /* Account for padding */
         padding: 12px 10px;
-        border: 1px solid #ddd;
+        border: 1px solid #ccc;
         border-radius: 5px;
-        font-size: 1em;
-        transition: border-color 0.3s ease;
+        font-size: 16px;
+        box-sizing: border-box; /* Include padding in width */
     }
 
-        .input-group input[type="text"]:focus,
-        .input-group input[type="password"]:focus {
-            border-color: #2575fc;
-            outline: none;
-            box-shadow: 0 0 5px rgba(37, 117, 252, 0.3);
-        }
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-button[type="submit"] {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    .password-wrapper input {
+        padding-right: 40px; /* Space for the eye icon */
+    }
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #cb2b2b; /* Red button color */
     color: white;
-    padding: 15px 25px;
     border: none;
     border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    width: 100%;
-    margin-top: 20px;
+    font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-    button[type="submit"]:hover {
-        background: linear-gradient(to right, #500cb3, #1e60d4);
-        transform: translateY(-2px);
+    .login-button:hover {
+        background-color: #af2222; /* Darker red on hover */
     }
 
-.links {
-    margin-top: 25px;
-    font-size: 0.9em;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .logo-section {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-right: 0;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .login-form-section {
+        padding-left: 0;
+    }
 }
-
-    .links a {
-        color: #2575fc;
-        text-decoration: none;
-        margin: 0 10px;
-        transition: color 0.3s ease;
-    }
-
-        .links a:hover {
-            color: #6a11cb;
-            text-decoration: underline;
-        }
-
 
 footer {
     position: absolute;
