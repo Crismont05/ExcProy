@@ -64,6 +64,7 @@ namespace CapaNegocio
 
             if (string.IsNullOrEmpty(mensaje))
             {
+                obj.clave = CN_Recursos.ConvertirSHA256(obj.clave); 
                 return objCapaDatos.Editar(obj, out mensaje);
             }
             else
