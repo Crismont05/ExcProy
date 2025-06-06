@@ -57,7 +57,7 @@ body {
 }
 
 .user-icon-large {
-    font-size: 5px; /* Adjust size of the large user icon */
+    font-size: 50px; /* Adjust size of the large user icon */
     color: #2a2a2a;
     margin-bottom: 20px;
 }
