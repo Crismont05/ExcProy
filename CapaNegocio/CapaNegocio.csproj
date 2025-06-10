@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_Existencia.cs" />
     <Compile Include="CN_Inventario.cs" />
     <Compile Include="CN_Producto.cs" />
     <Compile Include="CN_Proveedor.cs" />
     <Compile Include="CN_Recursos.cs" />
     <Compile Include="CN_Usuario.cs" />
+    <Compile Include="CN_Entrada.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CN_Salida.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
