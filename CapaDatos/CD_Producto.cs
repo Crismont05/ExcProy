@@ -19,7 +19,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "SELECT * FROM Producto WHERE estado = 1";
+                    string query = "SELECT idProducto, idProveedor, nombre, precio, categoria, estado FROM Producto WHERE estado = 1";
 
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
@@ -68,6 +68,7 @@ namespace CapaDatos
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     oconexion.Open();
+                    cmd.ExecuteNonQuery();
 
                     id = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
                     mensaje = cmd.Parameters["Mensaje"].Value.ToString();
