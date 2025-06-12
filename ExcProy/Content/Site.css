@@ -4244,6 +4244,15 @@ textarea.form-control-lg {
     margin-bottom: 0;
     list-style: none;
 }
+.sidebar-logo {
+    max-width: 50%; /* Ensures the image never exceeds the width of its parent */
+    height: auto;    /* Maintains the aspect ratio of the image */
+    display: block;
+    align-content: center;
+    /* Optional: Can help with layout consistency */
+    /* You might want to add some padding or margin if needed */
+    padding: 10px; /* Example: Add some padding around the logo */
+}
 
     .navbar-nav .show > .nav-link,
     .navbar-nav .nav-link.active {
