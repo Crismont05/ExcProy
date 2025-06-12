@@ -12,9 +12,6 @@ namespace ExcProy
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new Bundle("~/bundles/complementos").Include(
-                        "~/Scripts/fontawesome/all.min.js"));
-
-            bundles.Add(new Bundle("~/bundles/Complementos2").Include(
                         "~/Scripts/scripts.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
