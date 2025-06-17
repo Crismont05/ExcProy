@@ -4244,6 +4244,15 @@ textarea.form-control-lg {
     margin-bottom: 0;
     list-style: none;
 }
+.sidebar-logo {
+    max-width: 50%; /* Ensures the image never exceeds the width of its parent */
+    height: auto;    /* Maintains the aspect ratio of the image */
+    display: block;
+    align-content: center;
+    /* Optional: Can help with layout consistency */
+    /* You might want to add some padding or margin if needed */
+    padding: 10px; /* Example: Add some padding around the logo */
+}
 
     .navbar-nav .show > .nav-link,
     .navbar-nav .nav-link.active {
@@ -8964,7 +8973,7 @@ textarea.form-control-lg {
 
 .bg-dark {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    background-color: rgba(191,59,50,1) !important;
 }
 
 .bg-black {
@@ -12627,8 +12636,9 @@ body {
     }
 
 .sb-sidenav-dark {
-    background-color: #212529;
-    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #B9B3B3;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
     .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
@@ -12865,3 +12875,4 @@ body {
     font-size: 0.75rem;
     border-radius: 0.375rem !important;
 }
+
