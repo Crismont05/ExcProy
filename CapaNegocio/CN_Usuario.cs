@@ -32,12 +32,14 @@ namespace CapaNegocio
             {
                 mensaje = "El usuario no puede ser vacío";
             }
+            if (string.IsNullOrEmpty(obj.clave) || string.IsNullOrWhiteSpace(obj.clave))
+            {
+                mensaje = "La clave no puede ser vacía";
+            }
 
-            if(string.IsNullOrEmpty(mensaje)) 
+            if (string.IsNullOrEmpty(mensaje)) 
             { 
-                //Implementar clave autogenerada aqui (dependiendo de logica de negocio)
-                string clave = string.Empty;
-                obj.clave = CN_Recursos.ConvertirSHA256(clave);
+                obj.clave = CN_Recursos.ConvertirSHA256(obj.clave);
                 return objCapaDatos.Registrar(obj, out mensaje);
             }
             else
@@ -60,6 +62,10 @@ namespace CapaNegocio
             if (string.IsNullOrEmpty(obj.usuario) || string.IsNullOrWhiteSpace(obj.usuario))
             {
                 mensaje = "El usuario no puede ser vacío";
+            }
+            if (string.IsNullOrEmpty(obj.clave) || string.IsNullOrWhiteSpace(obj.clave))
+            {
+                mensaje = "La clave no puede ser vacía";
             }
 
             if (string.IsNullOrEmpty(mensaje))
