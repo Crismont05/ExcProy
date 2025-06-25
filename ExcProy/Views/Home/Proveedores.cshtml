@@ -106,11 +106,13 @@
         });
 
         function abrirModal(json) {
+            $("#txtId").val(0);
             $("#txtNombreORG").val("");
             $("#txtNombres").val("");
             $("#txtApellidos").val("");
             $("#alertError").hide();
             if (json != null) {
+                $("#txtId").val(json.idProveedor);
                 $("#txtNombreORG").val(json.nombreORG);
                 $("#txtNombres").val(json.nombres);
                 $("#txtApellidos").val(json.apellidos);
@@ -123,5 +125,106 @@
             var data = tabladata.row(selectedRow).data();
             abrirModal(data)
         })
+
+        $("#tabla tbody").on("click", ".btn-eliminar", function () {
+            var selectedProvider = $(this).closest("tr")
+            var data = tabladata.row(selectedProvider).data();
+
+            Swal.fire({
+                title: "¿Está seguro?",
+                text: "¿Desea eliminar al proveedor?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, estoy seguro",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                        jQuery.ajax({
+                            url: '@Url.Action("EliminarProveedor", "Home")',
+                            type: "POST",
+                            data: JSON.stringify({ id : data.idProveedor }),
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                if (data.resultado) {
+                                    tabladata.row(selectedProvider).remove().draw();
+                                    Swal.fire({
+                                        title: "Proveedor eliminado",
+                                        text: "El proveedor ha sido eliminado",
+                                        icon: "success"
+                                    });
+                                } else {
+                                    Swal.fire(data.mensaje)
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error);
+                                Swal.fire({
+                                    title: "Error del servidor",
+                                    text: "No se puede eliminar el proveedor",
+                                    icon: "error"
+                                })
+                            }
+                        });
+
+                }
+            });
+        })
+
+        function guardar() {
+            var Proveedor = {
+                idProveedor: $("#txtId").val(),
+                nombres: $("#txtNombres").val(),
+                apellidos: $("#txtApellidos").val(),
+                nombreORG: $("#txtNombreORG").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarProveedor", "Home")',
+                type: "POST",
+                data: JSON.stringify({ obj : Proveedor }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    //crear proveedor
+                    if (Proveedor.idProveedor == 0) {
+                        if (data.resultado != 0) {
+                            Proveedor.idProveedor = data.resultado;
+                            tabladata.row.add(Proveedor).draw(false);
+                            $("#formModal").modal("hide");
+                        } else {
+                            $("#alertError").text(data.mensaje);
+                            $("#alertError").show();
+                        }
+                    }
+                    //editar proveedor
+                    else {
+                        if (data.resultado) {
+                            tabladata.row(selectedRow).data(Proveedor).draw(false);
+                            selectedRow = null;
+                            $("#formModal").modal("hide");
+                        } else {
+                            $("#alertError").text(data.mensaje);
+                            $("#alertError").show();
+                        }
+                    }
+                },
+                error: function (error) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#alertError").text("Error AJAX");
+                    $("#alertError").show();
+                },
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
     </script>
 }

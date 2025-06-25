@@ -58,7 +58,6 @@ namespace CapaDatos
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("sp_RegistrarProveedor", oconexion);
-                    cmd.Parameters.AddWithValue("idProveedor", obj.idProveedor);
                     cmd.Parameters.AddWithValue("Nombres", obj.nombres);
                     cmd.Parameters.AddWithValue("Apellidos", obj.apellidos);
                     cmd.Parameters.AddWithValue("NombreORG", obj.nombreORG);
@@ -89,7 +88,8 @@ namespace CapaDatos
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("sp_EditarProveedor", oconexion);
-                    cmd.Parameters.AddWithValue("Nombres", obj.idProveedor);  
+                    cmd.Parameters.AddWithValue("idProveedor", obj.idProveedor);
+                    cmd.Parameters.AddWithValue("Nombres", obj.nombres);  
                     cmd.Parameters.AddWithValue("Apellidos", obj.apellidos);
                     cmd.Parameters.AddWithValue("NombreORG", obj.nombreORG);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
