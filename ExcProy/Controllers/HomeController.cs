@@ -104,5 +104,38 @@ namespace ExcProy.Controllers
 
             return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult ListarProductos()
+        {
+            List<Producto> lista = new List<Producto>();
+            lista = new CN_Producto().Listar();
+
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GuardarProducto(Producto obj)
+        {
+            object result;
+            string mensaje = string.Empty;
+            if (obj.idProducto == 0)
+            {
+                result = new CN_Producto().Registrar(obj, out mensaje);
+            }
+            else
+            {
+                result = new CN_Producto().Editar(obj, out mensaje);
+            }
+            return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult EliminarProducto(int id)
+        {
+            bool result = false;
+            string mensaje = string.Empty;
+
+            result = new CN_Producto().Eliminar(id, out mensaje);
+
+            return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
