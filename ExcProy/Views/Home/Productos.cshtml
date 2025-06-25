@@ -135,9 +135,7 @@
         });
 
         function abrirModal(json) {
-            var data = listProviders
-
-            var proveedoresIds = [...new Set(data.map(x => x.idProveedor))];
+            var proveedoresIds = [...new Set(listProviders.map(x => x.idProveedor))];
             var proveedores = proveedoresIds.map(id => {
                 var prov = listProviders.find(p => p.idProveedor == id);
                 return prov ? { id: prov.idProveedor, nombre: prov.nombreORG } : { id: id, nombre: id };
@@ -145,7 +143,7 @@
 
             var $cboProveedor = $("#cboProveedor");
             $cboProveedor.empty();
-            $cboProveedor.append('<option value="">Seleccione</option>');
+            $cboProveedor.append('<option value="">Selecione</option>');
             proveedores.forEach(function (prov) {
                 $cboProveedor.append($('<option>', { value: prov.id, text: prov.nombre }))
             });
@@ -221,7 +219,13 @@
         function guardar() {
             var precioValor = parseFloat($("#txtPrecio").val().replace(',', '.'));
             if (isNaN(precioValor)) {
-                $("#alertError").text("El precio debe ser un número válido.");
+                $("#alertError").text("El precio debe ser un número válido");
+                $("#alertError").show();
+                return;
+            }
+
+            if ($("#cboProveedor").val() == "") {
+                $("#alertError").text("Debe seleccionar un proveedor");
                 $("#alertError").show();
                 return;
             }
