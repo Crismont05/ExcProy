@@ -46,6 +46,14 @@ namespace ExcProy.Controllers
 
             return Json(new {data = lista}, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult ListarProveedores()
+        {
+            List<Proveedor> lista = new List<Proveedor>();
+            lista = new CN_Proveedor().Listar();
+
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public JsonResult GuardarUsuario(Usuario obj)
         {
