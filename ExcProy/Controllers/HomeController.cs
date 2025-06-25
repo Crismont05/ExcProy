@@ -30,6 +30,10 @@ namespace ExcProy.Controllers
         {
             return View();
         }
+        public ActionResult Productos()
+        {
+            return View();
+        }
 
         [HttpGet]
         public JsonResult ListarUsuarios()
