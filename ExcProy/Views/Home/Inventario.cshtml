@@ -4,5 +4,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Inventario</h2>
+<h2>Inventarios disponibles</h2>
 
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-box me-1"></i>Inventarios
+    </div>
+    <table id="tabla" class="table table-sm" style="width: 100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn" style="background-color: #BF3B3B; color:white;" onclick="abrirModal(null)">Crear Nuevo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="formModal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #BF3B3B; color:white">
+                <h5 class="modal-title">Inventario</h5>
+                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-2">
+                    <input id="txtId" type="hidden" value="0">
+                    <div class="col-sm-6">
+                        <label for="txtNombreINV" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="txtNombreINV" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtestados" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="txtestados" autocomplete="off">
+                    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" style="background-color: #BF3B3B; color:white" onclick="guardar()">
+                    Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
