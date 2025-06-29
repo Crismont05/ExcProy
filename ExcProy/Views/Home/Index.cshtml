@@ -133,28 +133,3 @@
     </div>
 </div>
 
-
-@*@section scripts{
-    <script>
-
-        jQuery.ajax({
-            url: @Url.Action("VerDashboard", "Home")´,
-            type: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-
-                var objeto = data.resultado;
-
-                $("#totalproductos").text(objeto.TotalProductos)
-                //$("#totalventas").text (objeto.TotalVentas)
-                $("#totalentradas").text(objeto.TotalEntradas)
-                $("#totalsalidas").text(objeto.TotalSalidas)
-            }
-
-        })
-
-    </script>*@
-    
-    
-    
