@@ -19,7 +19,7 @@ namespace ExcProy.Controllers
             return View();
         }
         public ActionResult Ventas()
-        { 
+        {
             return View();
         }
         public ActionResult Reportes()
@@ -44,7 +44,7 @@ namespace ExcProy.Controllers
             List<Usuario> lista = new List<Usuario>();
             lista = new CN_Usuario().Listar();
 
-            return Json(new {data = lista}, JsonRequestBehavior.AllowGet);
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult GuardarUsuario(Usuario obj)
