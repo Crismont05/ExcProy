@@ -19,7 +19,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "SELECT idProducto, idProveedor, nombre, precio, categoria, estado FROM Producto WHERE estado = 1";
+                    string query = "SELECT idProducto, idProveedor, nombre, precio, categoria, estado FROM Productos WHERE estado = 1";
 
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
@@ -93,7 +93,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("idProducto", obj.idProducto);
                     cmd.Parameters.AddWithValue("idProveedor", obj.idProveedor);
                     cmd.Parameters.AddWithValue("Nombre", obj.nombre);
-                    cmd.Parameters.AddWithValue("Precio", obj.estado);
+                    cmd.Parameters.AddWithValue("Precio", obj.precio);
                     cmd.Parameters.AddWithValue("Categoria", obj.categoria);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;

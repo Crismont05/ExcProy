@@ -30,7 +30,14 @@ namespace ExcProy.Controllers
         {
             return View();
         }
-
+        public ActionResult Productos()
+        {
+            return View();
+        }
+        public ActionResult Proveedores()
+        {
+            return View();
+        }
         [HttpGet]
         public JsonResult ListarUsuarios()
         {
@@ -61,6 +68,72 @@ namespace ExcProy.Controllers
             string mensaje = string.Empty;
 
             result = new CN_Usuario().Eliminar(id, out mensaje);
+
+            return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListarProveedores()
+        {
+            List<Proveedor> lista = new List<Proveedor>();
+            lista = new CN_Proveedor().Listar();
+
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GuardarProveedor(Proveedor obj)
+        {
+            object result;
+            string mensaje = string.Empty;
+            if (obj.idProveedor == 0)
+            {
+                result = new CN_Proveedor().Registrar(obj, out mensaje);
+            }
+            else
+            {
+                result = new CN_Proveedor().Editar(obj, out mensaje);
+            }
+            return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult EliminarProveedor(int id)
+        {
+            bool result = false;
+            string mensaje = string.Empty;
+
+            result = new CN_Proveedor().Eliminar(id, out mensaje);
+
+            return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListarProductos()
+        {
+            List<Producto> lista = new List<Producto>();
+            lista = new CN_Producto().Listar();
+
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GuardarProducto(Producto obj)
+        {
+            object result;
+            string mensaje = string.Empty;
+            if (obj.idProducto == 0)
+            {
+                result = new CN_Producto().Registrar(obj, out mensaje);
+            }
+            else
+            {
+                result = new CN_Producto().Editar(obj, out mensaje);
+            }
+            return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult EliminarProducto(int id)
+        {
+            bool result = false;
+            string mensaje = string.Empty;
+
+            result = new CN_Producto().Eliminar(id, out mensaje);
 
             return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
