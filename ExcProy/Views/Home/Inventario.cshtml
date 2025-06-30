@@ -4,19 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Inventarios disponibles</h2>
+<h2>Inventarios de productos</h2>
 
 <div class="card">
     <div class="card-header">
-        <i class="fas fa-box me-1"></i>Inventarios
+        <i class="fas fa-box me-1"></i>Inventario
     </div>
     <table id="tabla" class="table table-sm" style="width: 100%">
         <thead>
             <tr>
-                <th></th>
-                <th>Nombre</th>
-                <th>Estado</th>
-                <th></th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Existencia</th>
             </tr>
         </thead>
         <tbody>
@@ -47,19 +47,33 @@
                 <div class="row g-2">
                     <input id="txtId" type="hidden" value="0">
                     <div class="col-sm-6">
-                        <label for="txtNombreINV" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="txtNombreINV" autocomplete="off">
+                        <label for="txtProductoINV" class="form-label">Producto</label>
+                        <input type="text" class="form-control" id="txtProductoINV" autocomplete="off">
                     </div>
                     <div class="col-sm-6">
-                        <label for="txtestados" class="form-label">Estado</label>
-                        <input type="text" class="form-control" id="txtestados" autocomplete="off">
+                        <label for="txtPrecioINV" class="form-label">Precio</label>
+                        <input type="text" class="form-control" id="txtPrecioINV" autocomplete="off">
                     </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #BF3B3B; color:white" onclick="guardar()">
-                    Guardar
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
+                    <div class="col-sm-6">
+                        <label for="txtDescripcionINV" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="txtDescripcionINV" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtExistenciaINV" class="form-label">Existencia</label>
+                        <input type="text" class="form-control" id="txtExistenciaINV" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="cboInventario" class="form-label">Inventario</label>
+                        <select id="cboInventario" class="form-select">
+                            @*Se llena dinámicamente*@
+                            <option value="" disabled selected>Seleccione</option>
+                        </select>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" style="background-color: #BF3B3B; color:white" onclick="guardar()">
+                                Guardar
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
 </div>
