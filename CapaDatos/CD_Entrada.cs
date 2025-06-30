@@ -132,9 +132,11 @@ namespace CapaDatos
 
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    SqlCommand cmd = new SqlCommand("DELETE FROM Entradas WHERE idEntrada = @idEntrada", oconexion);
-                    cmd.Parameters.AddWithValue("@idEntrada", id);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("sp_EliminarEntrada", oconexion);
+                    cmd.Parameters.AddWithValue("idEntrada", id);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
                     oconexion.Open();
                      resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
                 }  

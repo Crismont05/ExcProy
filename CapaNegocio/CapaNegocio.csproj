@@ -48,6 +48,7 @@
     <Compile Include="CN_Recursos.cs" />
     <Compile Include="CN_Usuario.cs" />
     <Compile Include="CN_Entrada.cs" />
+    <Compile Include="CN_Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CN_Salida.cs" />
   </ItemGroup>
