@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.ExclusivoInv</title>
     <script src="https://kit.fontawesome.com/d3ab8ed5b3.js" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/Site.css")
     @*@Scripts.Render("~/bundles/modernizr")*@
@@ -51,14 +51,6 @@
                         <a class="nav-link" href="@Url.Action("Inventario","Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes-packing" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Inventario</span>
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Ventas","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-line" style="color:#78807D70"></i></div>
-                            <span style="color: #78807D;">Ventas</span>
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Reportes","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-file-lines" style="color:#78807D70"></i></div>
-                            <span style="color: #78807D;">Reportes</span>
                         </a>
                         <div class="sb-sidenav-menu-heading " style="color:#78807D70">Admin</div>
                         <a class="nav-link" href="@Url.Action("Usuarios","Home")">

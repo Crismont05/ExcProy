@@ -100,7 +100,7 @@
                     listProviders = resultado.data;
                 }
             });
-        });
+        }); 
 
         tabladata = $("#tabla").DataTable({
             responsive: true,
@@ -144,7 +144,7 @@
             var $cboProveedor = $("#cboProveedor");
             $cboProveedor.empty();
             $cboProveedor.append('<option value="">Selecione</option>');
-            proveedores.forEach(function (prov) {
+            proveedores.forEach(function (prov) {   
                 $cboProveedor.append($('<option>', { value: prov.id, text: prov.nombre }))
             });
 
