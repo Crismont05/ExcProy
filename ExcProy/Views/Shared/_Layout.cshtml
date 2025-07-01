@@ -7,6 +7,10 @@
     <script src="https://kit.fontawesome.com/d3ab8ed5b3.js" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/Site.css")
     @*@Scripts.Render("~/bundles/modernizr")*@
+    @{
+        var RolUsuario = Session["rol"] as string;// O Session["rol"] == "Admin", según cómo manejes permisos
+    }
+
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -52,19 +56,23 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes-packing" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Inventario</span>
                         </a>
+
+                        @if (RolUsuario == "admin")
+                        {
                         <div class="sb-sidenav-menu-heading " style="color:#78807D70">Admin</div>
-                        <a class="nav-link" href="@Url.Action("Usuarios","Home")">
+                        <a class="nav-link" href="@Url.Action("Usuarios", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-users" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Usuarios</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Proveedores","Home")">
+                        <a class="nav-link" href="@Url.Action("Proveedores", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-truck" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Proveedores</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Productos","Home")">
+                        <a class="nav-link" href="@Url.Action("Productos", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-box" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Productos</span>
                         </a>
+                        }
                     </div>
                 </div>
             </nav>
