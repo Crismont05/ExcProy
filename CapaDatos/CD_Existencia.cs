@@ -18,7 +18,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "SELECT idExistencia, idInventario, idProducto, cantidad FROM Existencias";
+                    string query = "SELECT idExistencia, idInventario, idProducto, stock FROM Existencias";
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
                     oconexion.Open();
@@ -29,10 +29,10 @@ namespace CapaDatos
                             lista.Add(
                                 new Existencia()
                                 {
-                                    idExistencia = Convert.ToInt32(dr["idEntrada"]),
+                                    idExistencia = Convert.ToInt32(dr["idExistencia"]),
                                     idInventario = Convert.ToInt32(dr["idInventario"]),
                                     idProducto = Convert.ToInt32(dr["idProducto"]),
-                                    stock = Convert.ToInt32(dr["cantidad"])
+                                    stock = Convert.ToInt32(dr["stock"])
                                 });
                         }
                     }

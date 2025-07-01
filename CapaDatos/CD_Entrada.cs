@@ -138,7 +138,9 @@ namespace CapaDatos
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oconexion.Open();
-                     resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                    cmd.ExecuteNonQuery();
+                    resultado = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+                    mensaje = cmd.Parameters["mensaje"].Value.ToString();
                 }  
             }
             catch (Exception ex)
