@@ -6,7 +6,12 @@
     <title>@ViewBag.ExclusivoInv</title>
     <script src="https://kit.fontawesome.com/d3ab8ed5b3.js" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/css")
     @*@Scripts.Render("~/bundles/modernizr")*@
+    @{
+        var RolUsuario = Session["rol"] as string;// O Session["rol"] == "Admin", según cómo manejes permisos
+    }
+
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -15,24 +20,22 @@
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        @*<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="btnNavbarSearch" />
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
             </div>
-        </form>
+        </form>*@
         <!-- Navbar-->
-        @*<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Index", "Acceso")">Cerrar sesión</a></li>
                 </ul>
             </li>
-        </ul>*@
+        </ul>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -52,19 +55,23 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes-packing" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Inventario</span>
                         </a>
+
+                        @if (RolUsuario == "admin")
+                        {
                         <div class="sb-sidenav-menu-heading " style="color:#78807D70">Admin</div>
-                        <a class="nav-link" href="@Url.Action("Usuarios","Home")">
+                        <a class="nav-link" href="@Url.Action("Usuarios", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-users" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Usuarios</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Proveedores","Home")">
+                        <a class="nav-link" href="@Url.Action("Proveedores", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-truck" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Proveedores</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Productos","Home")">
+                        <a class="nav-link" href="@Url.Action("Productos", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-box" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Productos</span>
                         </a>
+                        }
                     </div>
                 </div>
             </nav>

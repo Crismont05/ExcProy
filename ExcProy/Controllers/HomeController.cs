@@ -1,7 +1,11 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -141,6 +145,7 @@ namespace ExcProy.Controllers
 
             return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
+
         //Existencias
         [HttpGet]
         public JsonResult ListarExistencias()
@@ -218,5 +223,67 @@ namespace ExcProy.Controllers
 
             return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult ListaReporte(string fechainicio, string fechafin)
+        {
+            List<Reporte> olista = new List<Reporte>();
+
+            olista = new CN_Reporte().Ventas(fechainicio, fechafin);
+
+            return Json(new { data = olista }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public JsonResult VistaDashboard()
+        {
+            Dashboard objeto = new CN_Reporte().VerDashboard();
+            return Json(new { resultado = objeto }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        public FileResult ExportarVenta(string fechainicio, string fechafin)
+        {
+            List<Reporte> lista = new List<Reporte>();
+            lista = new CN_Reporte().Ventas(fechainicio, fechafin);
+
+            DataTable dt = new DataTable();
+
+            dt.Locale = new CultureInfo("es-ES");
+            dt.Columns.Add("FechaVenta", typeof(string));
+            dt.Columns.Add("NombredelProducto", typeof(string));
+            dt.Columns.Add("precio", typeof(decimal));
+            dt.Columns.Add("cantidad", typeof(int));
+            dt.Columns.Add("total", typeof(decimal));
+
+            foreach (Reporte item in lista)
+            {
+                dt.Rows.Add( new object[]
+                {
+                    item.FechaVenta,
+                    item.NombredelProducto,
+                    item.precio,
+                    item.cantidad,
+                    item.total
+                });
+            }
+
+            dt.TableName = "Datos";
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    byte[] content = stream.ToArray();
+                    string fileName = $"ReporteVentas_{fechainicio}_{fechafin}.xlsx";
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                }
+            }
+        }
     }
 }
+

@@ -16,7 +16,9 @@ namespace ExcProy
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.responsive.js",
                         "~/Scripts/loadingoverlay/loadingoverlay.min.js",
-                        "~/Scripts/sweetalert2/sweetalert2.all.min.js"));
+                        "~/Scripts/sweetalert2/sweetalert2.all.min.js",
+                        "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery-ui-1.14.1.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             //            "~/Scripts/jquery.validate*"));
@@ -34,7 +36,8 @@ namespace ExcProy
                       "~/Content/site.css",
                       "~/Content/DataTables/css/jquery.dataTables.css",
                       "~/Content/DataTables/css/responsive.dataTables.css",
-                      "~/Content/sweetalert2/sweetalert2.min.css"));
+                      "~/Content/sweetalert2/sweetalert2.min.css",
+                      "~/Content/themes/base/jquery-ui.css"));
         }
     }
 }
