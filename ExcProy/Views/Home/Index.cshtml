@@ -127,28 +127,66 @@
 
 
 @section scripts{
-    
+
     <script>
 
-        jQuery.ajax({
-            url: '@Url.Action("VistaDashboard", "Home")',
-            type: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
+        var tabladata;
 
-                var objeto = data.resultado;
+            $("#txtfechadeinicio").datepicker({dateFormat : 'dd/mm/yy'}).datepicker('setDate', new Date())
+            $("#txtfechafin").datepicker({dateFormat : 'dd/mm/yy'}).datepicker('setDate', new Date())
 
-                $("#totalproductos").text(objeto.TotalProductos)
-                $("#totalventas").text(objeto.TotalVentas)
-                $("#totalentradas").text(objeto.TotalEntradas)
-                $("#totalsalidas").text(objeto.TotalSalidas)
-            }
+            jQuery.ajax({
+                url: '@Url.Action("VistaDashboard", "Home")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
 
-        });
+                    var objeto = data.resultado;
+
+                    $("#totalproductos").text(objeto.TotalProductos)
+                    $("#totalventas").text(objeto.TotalVentas)
+                    $("#totalentradas").text(objeto.TotalEntradas)
+                    $("#totalsalidas").text(objeto.TotalSalidas)
+                }
+
+            });
+
+            var Url = '@Url.Action("ListaReporte", "Home")'+
+                "?fechainicio=" + encodeURIComponent ($("#txtfechadeinicio").val()) +
+                "&fechafin=" + encodeURIComponent ($("#txtfechafin").val())
+
+          tabladata = $("#tabla").DataTable({
+          responsive: true,
+          ordering: false,
+          "ajax": {
+              url: Url,
+              type: "GET",
+              datatype: "json"
+          },
+          "columns": [
+              { "data": "FechaVenta" },
+              { "data": "NombredelProducto" },
+              { "data": "precio" },
+              { "data": "cantidad" },
+              { "data": "total" }
+          ],
+          "language": {
+              "url": "//cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json"
+          }
+      });
+
+      $("#btnbuscar").on("click", function (){
+
+            var nueva_url = '@Url.Action("ListaReporte", "Home")'+
+                "?fechainicio=" + encodeURIComponent ($("#txtfechadeinicio").val()) +
+                "&fechafin=" + encodeURIComponent ($("#txtfechafin").val())
+
+            tabladata.ajax.url(nueva_url).load();
+      })
 
     </script>
 
 
-    }
+}
 
