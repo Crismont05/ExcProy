@@ -218,25 +218,25 @@ namespace ExcProy.Controllers
             result = new CN_Salida().Eliminar(id, out mensaje);
 
             return Json(new { resultado = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
-
-
-        [HttpGet]
-        public JsonResult ListaReporte(string fechainicio, string fechafin)
-        {
-            List<Reporte> olista = new List<Reporte>();
-
-            olista = new CN_Reporte().Ventas(fechainicio, fechafin);
-
-            return Json(new { data = olista }, JsonRequestBehavior.AllowGet);
         }
 
+            [HttpGet]
+            public JsonResult ListaReporte(string fechainicio, string fechafin)
+            {
+                List<Reporte> olista = new List<Reporte>();
 
-        [HttpGet]
-        public JsonResult VistaDashboard()
-        {
-            Dashboard objeto = new CN_Reporte().VerDashboard();
-            return Json(new { resultado = objeto }, JsonRequestBehavior.AllowGet);
+                olista = new CN_Reporte().Ventas(fechainicio, fechafin);
 
+                return Json(new { data = olista }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            [HttpGet]
+            public JsonResult VistaDashboard()
+            {
+                Dashboard objeto = new CN_Reporte().VerDashboard();
+                return Json(new { resultado = objeto }, JsonRequestBehavior.AllowGet);
+
+            }
         }
     }
-}
