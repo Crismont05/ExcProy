@@ -314,10 +314,12 @@
                 $cboProductoEnt.append($('<option>', { value: prod.id, text: prod.nombre }))
             });
 
+            $("#txtIdEnt").val("0");
             $("#cboProductoEnt").val("");
             $("#txtCantidadEnt").val("");
             $("#alertErrorEnt").hide();
             if (json != null) {
+                $("#txtIdEnt").val(json.idEntrada);
                 $("#cboProductoEnt").val(json.idProducto);
                 $("#txtCantidadEnt").val(json.cantidad);
             }
@@ -392,10 +394,12 @@
                 $cboProductoSal.append($('<option>', { value: prod.id, text: prod.nombre }))
             });
 
+            $("#txtIdSal").val("0")
             $("#cboProductoSal").val("");
             $("#txtCantidadSal").val("");
             $("#alertErrorSal").hide();
             if (json != null) {
+                $("#txtIdSal").val(json.idSalida);
                 $("#cboProductoSal").val(json.idProducto);
                 $("#txtCantidadSal").val(json.cantidad);
             }
