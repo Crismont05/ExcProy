@@ -191,6 +191,16 @@
 
 
         function guardar() {
+            var clave = $("#txtClave").val();
+            if (clave) {
+                var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+                if (!regex.test(clave)) {
+                    $("#alertError").text("La clave debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial");
+                    $("#alertError").show();
+                    return;
+                }
+            }
+
             var Usuario = {
                 idUsuario: $("#txtId").val(),
                 usuario: $("#txtUsuario").val(),

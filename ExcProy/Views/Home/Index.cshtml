@@ -71,7 +71,7 @@
     </div>
     <div class="card-body">
 
-        <form>
+        <form action="@Url.Action("ExportarVenta", "Home")" method="post">
 
             <div class="row align-items-end">
                 <div class="col-sm-2">
@@ -184,6 +184,8 @@
 
             tabladata.ajax.url(nueva_url).load();
       })
+
+
 
     </script>
 
