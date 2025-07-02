@@ -33,7 +33,7 @@ namespace ExcProy.Controllers
             {
                 // Guarda el usuario y rol en la sesión
                 Session["usuario"] = oUsuario.usuario;
-                Session["rol"] = oUsuario.rol; // Asegúrate que el campo se llame así en tu clase Usuario
+                Session["rol"] = oUsuario.rol; 
 
                 return RedirectToAction("Index", "Home");
             }
