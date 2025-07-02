@@ -166,7 +166,7 @@ namespace ExcProy.Controllers
         }
         [HttpPost]
         public JsonResult GuardarEntrada(Entrada obj)
-        {
+       {
             object result;
             string mensaje = string.Empty;
             if (obj.idEntrada == 0)

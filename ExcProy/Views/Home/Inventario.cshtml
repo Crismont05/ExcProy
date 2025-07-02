@@ -107,7 +107,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #BF3B3B; color:white" onclick="guardarEnt()">
+                <button type="button" id="btnGuardarEnt" class="btn" style="background-color: #BF3B3B; color:white">
                     Guardar
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -147,7 +147,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #BF3B3B; color:white" onclick="guardarSal()">
+                <button type="button" id="btnGuardarSal" class="btn" style="background-color: #BF3B3B; color:white">
                     Guardar
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -174,6 +174,9 @@
                 }
             });
         });
+
+        $("#btnGuardarEnt").on("click", guardarEnt);
+        $("#btnGuardarSal").on("click", guardarSal);
 
         function actualizarEntrada() {
             tabladata1.ajax.reload(null, false);
@@ -409,7 +412,7 @@
         $("#tabla2 tbody").on("click", ".btn-editarSal", function () {
             selectedRow = $(this).closest("tr")
             var data = tabladata2.row(selectedRow).data();
-            abrirModalEnt(data)
+            abrirModalSal(data)
         });
 
         $("#tabla2 tbody").on("click", ".btn-eliminarSal", function () {
