@@ -20,7 +20,10 @@ namespace ExcProy.Controllers
         public ActionResult Index(string usuario, string clave)
         {
             Usuario oUsuario = new Usuario();
-            oUsuario = new CN_Usuario().Listar().Where(u => u.usuario == usuario && u.clave == CN_Recursos.ConvertirSHA256(clave)).FirstOrDefault();
+            oUsuario = new CN_Usuario().Listar()
+                .Where(u => u.usuario == usuario && u.clave == CN_Recursos.ConvertirSHA256(clave))
+                .FirstOrDefault();
+
             if (oUsuario == null)
             {
                 ViewBag.Error = "Usuario o contraseña no correcta";
@@ -28,9 +31,13 @@ namespace ExcProy.Controllers
             }
             else
             {
-                ViewBag.Error = null;
+                // Guarda el usuario y rol en la sesión
+                Session["usuario"] = oUsuario.usuario;
+                Session["rol"] = oUsuario.rol; // Asegúrate que el campo se llame así en tu clase Usuario
+
                 return RedirectToAction("Index", "Home");
             }
         }
+
     }
 }

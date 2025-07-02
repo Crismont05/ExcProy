@@ -3,10 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.ExclusivoInv</title>
     <script src="https://kit.fontawesome.com/d3ab8ed5b3.js" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/css")
     @*@Scripts.Render("~/bundles/modernizr")*@
+    @{
+        var RolUsuario = Session["rol"] as string;// O Session["rol"] == "Admin", según cómo manejes permisos
+    }
+
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -19,10 +24,10 @@
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="btnNavbarSearch" />
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>  
+            </div>
         </form>
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        @*<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -32,7 +37,7 @@
                     <li><a class="dropdown-item" href="#!">Logout</a></li>
                 </ul>
             </li>
-        </ul>
+        </ul>*@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -52,27 +57,23 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes-packing" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Inventario</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Ventas","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-line" style="color:#78807D70"></i></div>
-                            <span style="color: #78807D;">Ventas</span>
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Reportes","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-file-lines" style="color:#78807D70"></i></div>
-                            <span style="color: #78807D;">Reportes</span>
-                        </a>
+
+                        @if (RolUsuario == "admin")
+                        {
                         <div class="sb-sidenav-menu-heading " style="color:#78807D70">Admin</div>
-                        <a class="nav-link" href="@Url.Action("Usuarios","Home")">
+                        <a class="nav-link" href="@Url.Action("Usuarios", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-users" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Usuarios</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Proveedores","Home")">
+                        <a class="nav-link" href="@Url.Action("Proveedores", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-truck" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Proveedores</span>
                         </a>
-                        <a class="nav-link" href="@Url.Action("Productos","Home")">
+                        <a class="nav-link" href="@Url.Action("Productos", "Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-box" style="color:#78807D70"></i></div>
                             <span style="color: #78807D;">Productos</span>
                         </a>
+                        }
                     </div>
                 </div>
             </nav>
